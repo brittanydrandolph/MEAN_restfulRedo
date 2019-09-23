@@ -1,0 +1,39 @@
+<h1>{{title}}</h1>
+<div> 
+<button (click)="getTasksFromService()">Show All Tasks</button>
+    <div *ngFor="let task of tasks; let idx = index">
+        <hr>
+        {{task.title}} <button class="task" (click)="show(idx)">Details</button>
+        <button class="task" (click)="editForm(task)">Edit</button>
+        <button class="task" (click)="delete(task)">Delete</button>
+    </div>
+    <hr>
+</div>
+
+
+<app-new-app *ngIf="selectedTask" [taskToShow]="selectedTask"></app-new-app>
+
+
+    <div>
+        <h1>Create a New Task</h1>
+        <form (submit)="onSubmit()">
+            <!-- {{newTask | json}} -->
+            <br>
+            Title: <input type="text" name="newTask.title" [(ngModel)]="newTask.title"> &nbsp;&nbsp;
+            Description:<input type="text" name="newTask.description" [(ngModel)]="newTask.description">
+            &nbsp;&nbsp; <input type="submit" value="Create a new task">
+        </form>
+    </div>
+    <div>
+        <hr>
+        <div *ngIf="editTog">
+            <h1>Edit A Task</h1>
+            <form (submit)="onSubmitEdit()">
+                <!-- {{newTask | json}} -->
+                <br>
+                Title: <input type="text" name="editTask.title" [(ngModel)]="editTask.title"> &nbsp;&nbsp;
+                Description:<input type="text" name="editTask.description" [(ngModel)]="editTask.description">
+                &nbsp;&nbsp; <input type="submit" value="Edit this task">
+            </form>
+        </div>
+    </div>
